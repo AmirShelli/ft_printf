@@ -1,4 +1,4 @@
-// #include "libft.h"
+#include "libft.a"
 
 static void	ft_arrclean(char **arr)
 {
