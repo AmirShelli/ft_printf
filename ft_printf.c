@@ -1,6 +1,7 @@
 #include <stdarg.h>
+#include "libft.h"
 
-int ft_vprintf(const char format, va_list ap);
+int ft_vprintf(const char **format, va_list ap);
 
 /* a series of if/else that
  * takes care of knowing 
@@ -16,25 +17,31 @@ int	ft_printf(const char *stringFormat, ...)
 	int		charCount;
 	va_list	ap;
 
+	charCount = 0;
 	va_start(ap, stringFormat);
-	while (*stringFormat++)
+	while (*stringFormat)
 	{
 		charCount++;
 		if (*stringFormat != '%')
 			ft_putchar(*stringFormat);
 		else
-			charCount += vprintf(*(++stringFormat), ap);
+		{
+			stringFormat++;
+			charCount += ft_vprintf(&stringFormat, ap);
+		}
 			// int ft_vprintf(const char format, va_list ap)
 			// use va_arg(ap, char)
+		stringFormat++;
 	}
 	va_end(ap);
 	return (charCount);
 }
 
-int ft_vprintf(const char format, va_list ap)
+int	ft_vprintf(const char **format, va_list ap)
 {
 	int	charCount;
 
+	charCount = 0;
 	if (format == '%')
 	{	
 		ft_putchar('%');
@@ -42,6 +49,7 @@ int ft_vprintf(const char format, va_list ap)
 	}
 	if (format == 'd')
 	{
-		putnum(va_arg(ap, int));
+		ft_putnbr(va_arg(ap, int));
 	}
+	return charCount;
 }
