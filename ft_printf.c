@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include "libft.h"
 
-int ft_vprintf(const char **format, va_list ap);
+int	ft_vprintf(const char **format, va_list ap);
 
 /* a series of if/else that
  * takes care of knowing 
@@ -26,11 +26,11 @@ int	ft_printf(const char *stringFormat, ...)
 			ft_putchar(*stringFormat);
 		else
 		{
+			// int ft_vprintf(const char format, va_list ap)
+			// use va_arg(ap, char)
 			stringFormat++;
 			charCount += ft_vprintf(&stringFormat, ap);
 		}
-			// int ft_vprintf(const char format, va_list ap)
-			// use va_arg(ap, char)
 		stringFormat++;
 	}
 	va_end(ap);
@@ -51,5 +51,5 @@ int	ft_vprintf(const char **format, va_list ap)
 	{
 		ft_putnbr(va_arg(ap, int));
 	}
-	return charCount;
+	return (charCount);
 }
