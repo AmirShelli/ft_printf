@@ -1,7 +1,8 @@
 #include <stdarg.h>
 #include "libft.h"
 
-int	ft_vprintf(const char **format, va_list ap);
+int		ft_vprintf(const char *format, va_list ap);
+char	*getFormat(const char **stringFormat);
 
 /* a series of if/else that
  * takes care of knowing 
@@ -15,6 +16,7 @@ int	ft_vprintf(const char **format, va_list ap);
 int	ft_printf(const char *stringFormat, ...)
 {
 	int		charCount;
+	char	*format;
 	va_list	ap;
 
 	charCount = 0;
@@ -26,10 +28,11 @@ int	ft_printf(const char *stringFormat, ...)
 			ft_putchar(*stringFormat);
 		else
 		{
-			// int ft_vprintf(const char format, va_list ap)
-			// use va_arg(ap, char)
-			stringFormat++;
-			charCount += ft_vprintf(&stringFormat, ap);
+			// TODO fetch the format by itself
+			// and process it with vprintf.
+			// call it char *getFormat(char *stringFormat);
+			format = getFormat(&stringFormat);
+			charCount += ft_vprintf(format, ap);
 		}
 		stringFormat++;
 	}
@@ -37,19 +40,35 @@ int	ft_printf(const char *stringFormat, ...)
 	return (charCount);
 }
 
-int	ft_vprintf(const char **format, va_list ap)
+int	ft_vprintf(const char *format, va_list ap)
 {
 	int	charCount;
 
 	charCount = 0;
-	if (format == '%')
+	if (format[0] == '%')
 	{	
 		ft_putchar('%');
 		charCount++;
 	}
-	if (format == 'd')
-	{
+	if (format[0] == 'd')
+	{	
 		ft_putnbr(va_arg(ap, int));
 	}
+	if (format[0] == 'e')
+		ft_putchar('e');
 	return (charCount);
+}
+
+char	*getFormat(const char **stringFormat)
+{
+	const char	*arg;
+
+	arg = ++(*stringFormat);
+	if (*arg == '%')
+	{
+		return ("%");
+	}
+	// else
+	printf("hello");
+	return ("e");
 }
