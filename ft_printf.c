@@ -47,19 +47,19 @@ int	ft_printf(const char *stringFormat, ...)
 
 int	ft_vprintf(const char *format, va_list ap)
 {
-	int	charCount;
-	int spaceCount;
+	int		charCount;
+	int		spaceCount;
+	char	*start;
 
 	charCount = 0;
-	spaceCount = 0;
+	start = *format;
 	if (*format == '%')
 	{	
 		ft_putchar('%');
 		charCount++;
 	}
 	while (ft_isdigit(*format++))
-		spaceCount;
-	
+		spaceCount++;
 	return (charCount);
 }
 
@@ -73,7 +73,7 @@ char	*getFormat(const char **stringFormat)
 	format_size = 1;
 	if (*start == '%')
 		return ("%");
-	while(!ft_isalpha(*stringFormat++))
+	while(!ft_isalpha(**stringFormat++))
 		format_size++;
 	tmp = (char *) malloc(format_size + 2);
 	return (ft_strcpy(tmp, start, format_size + 1));
