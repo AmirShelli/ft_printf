@@ -1,15 +1,12 @@
-#include <stdarg.h>
-#include "libft.h"
-
-int		ft_vprintf(const char *format, va_list ap);
-char	*getFormat(const char **stringFormat);
+#include "ft_printf.h"
+#include <stdio.h>
 
 /* a series of if/else that
  * takes care of knowing 
  * what percent prints what.
  * we can use vprintf 
  * for testing.
- * 
+ *
  * printf("this is an int %d", 23);
  */
 
@@ -37,38 +34,47 @@ int	ft_printf(const char *stringFormat, ...)
 		stringFormat++;
 	}
 	va_end(ap);
+
+	printf("\nneeds to show the format without the %%: %s \n", format);		// don't forget. 
 	return (charCount);
 }
+
+/* takes format without the %
+ * manages the format
+ * if given wrong format 
+ * returns error.
+ */
 
 int	ft_vprintf(const char *format, va_list ap)
 {
 	int	charCount;
+	int spaceCount;
 
 	charCount = 0;
-	if (format[0] == '%')
+	spaceCount = 0;
+	if (*format == '%')
 	{	
 		ft_putchar('%');
 		charCount++;
 	}
-	if (format[0] == 'd')
-	{	
-		ft_putnbr(va_arg(ap, int));
-	}
-	if (format[0] == 'e')
-		ft_putchar('e');
+	while (ft_isdigit(*format++))
+		spaceCount;
+	
 	return (charCount);
 }
 
 char	*getFormat(const char **stringFormat)
 {
-	const char	*arg;
+	const char	*start;
+	char		*tmp;
+	unsigned int format_size;
 
-	arg = ++(*stringFormat);
-	if (*arg == '%')
-	{
+	start = ++(*stringFormat);
+	format_size = 1;
+	if (*start == '%')
 		return ("%");
-	}
-	// else
-	printf("hello");
-	return ("e");
+	while(!ft_isalpha(*stringFormat++))
+		format_size++;
+	tmp = (char *) malloc(format_size + 2);
+	return (ft_strcpy(tmp, start, format_size + 1));
 }
