@@ -1,12 +1,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-/* a series of if/else that
- * takes care of knowing 
- * what percent prints what.
- * we can use vprintf 
- * for testing.
- *
+/* 
  * printf("this is an int %d", 23);
  */
 
@@ -27,6 +22,7 @@ int	ft_printf(const char *stringFormat, ...)
 		{
 			// TODO fetch the format by itself
 			// and process it with vprintf.
+			// to check and display the right thing
 			// call it char *getFormat(char *stringFormat);
 			format = getFormat(&stringFormat);
 			charCount += ft_vprintf(format, ap);
@@ -39,8 +35,9 @@ int	ft_printf(const char *stringFormat, ...)
 	return (charCount);
 }
 
-/* takes format without the %
- * manages the format
+/* 
+ * takes format without the %
+ * processes the format
  * if given wrong format 
  * returns error.
  */
@@ -48,18 +45,16 @@ int	ft_printf(const char *stringFormat, ...)
 int	ft_vprintf(const char *format, va_list ap)
 {
 	int		charCount;
-	int		spaceCount;
-	char	*start;
+	int 	precision;
+	char	type;
 
 	charCount = 0;
-	start = *format;
-	if (*format == '%')
+	if ( type == '%')
 	{	
 		ft_putchar('%');
 		charCount++;
 	}
-	while (ft_isdigit(*format++))
-		spaceCount++;
+
 	return (charCount);
 }
 
@@ -72,9 +67,9 @@ char	*getFormat(const char **stringFormat)
 	start = ++(*stringFormat);
 	format_size = 1;
 	if (*start == '%')
-		return ("%");
+		return ("%%");
 	while(!ft_isalpha(**stringFormat++))
 		format_size++;
-	tmp = (char *) malloc(format_size + 2);
+	tmp = (char *) malloc(format_size + 1);
 	return (ft_strcpy(tmp, start, format_size + 1));
 }

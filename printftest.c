@@ -5,5 +5,5 @@ int	main(void)
 {
 	// ft_printf("hello\n");
 	// ft_printf("this is an integer %d and another one %d", 1, 6);
-	printf("|%10d|, 1");
+	printf("|%2.3s|", "sirgay");
 }
