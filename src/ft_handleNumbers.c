@@ -2,7 +2,6 @@
 
 int	ft_handleInt(int d)
 {
-	printf(" ****im here %d**** ", d);
 	return (ft_handleString(ft_itoa(d)));
 }
 

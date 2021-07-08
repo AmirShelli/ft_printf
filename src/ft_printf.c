@@ -63,7 +63,7 @@ int	ft_displayFormat(char format, va_list ap)
 		return (ft_handlePointer(va_arg(ap, void *)));
 	if (format == 'i' || format == 'd' || format == 'u')
 		return (ft_handleInt(va_arg(ap, int)));
-	// if (format == 'u')
+	// if (format == 'u') what is this?
 	// 	return (ft_handleUnsigned(va_arg(ap, unsigned int)));
 	if (format == 'x' || format == 'X')
 		return (ft_handleHex(va_arg(ap, int)));
