@@ -16,8 +16,7 @@ int	ft_printf(const char *stringFormat, ...)
 		else
 		{
 			format = ft_getFormat(&stringFormat);
-			ft_putstr(format);
-			//charCount += ft_displayFormat(format[ft_strlen(stringFormat)], ap);
+			charCount += ft_displayFormat(format[ft_strlen(stringFormat)], ap);
 		}
 		stringFormat++;
 	}
@@ -33,15 +32,21 @@ char	*ft_getFormat(const char **string)
 
 	start = (char *)(++(*string));
 	formatSize = 1;
-	if (*start == '%')
-		return ("%%");
-	while (!ft_isalpha(**string++))
+	while (!ft_isalpha(**string) && **string != '%')
+	{	
 		formatSize++;
+		(*string)++;
+	}
 	tmp = (char *) malloc(formatSize + 1);
-	return (ft_strncpy(tmp, start, formatSize + 2));
+	return (ft_strncpy(tmp, start, formatSize));
 }
 
-// int	ft_displayFormat(char *format, va_list ap)
-// {
+/*
+ * Has to be changed with bonuses in mind.
+ * Not compatible with the bonus part at all.
+ */
 
-// }
+int	ft_displayFormat(char format, va_list ap)
+{
+	if (format == 'd')
+}
