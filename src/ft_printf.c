@@ -16,7 +16,7 @@ int	ft_printf(const char *stringFormat, ...)
 		else
 		{
 			format = ft_getFormat(&stringFormat);
-			charCount += ft_displayFormat(format[ft_strlen(stringFormat)], ap);
+			charCount += ft_displayFormat(format[ft_strlen(format) - 1], ap);
 		}
 		stringFormat++;
 	}
@@ -58,20 +58,16 @@ int	ft_displayFormat(char format, va_list ap)
 	if (format == 'c')
 		return (ft_handleCharacter(va_arg(ap, int)));
 	if (format == 's')
-		return (ft_handleString(va_arg(ap, int)));
+		return (ft_handleString(va_arg(ap, void *)));
 	if (format == 'p')
-		return (ft_handlePointer(va_arg(ap, int)));
-	if (format == 'i')
-		return (ft_handleInteger(va_arg(ap, int)));
-	if (format == 'd')
+		return (ft_handlePointer(va_arg(ap, void *)));
+	if (format == 'i' || format == 'd' || format == 'u')
 		return (ft_handleInt(va_arg(ap, int)));
-	if (format == 'u')
-		return (ft_handleUnsigned(va_arg(ap, int)));
-	if (format == 'x')
-		return (ft_handleHexSmall(va_arg(ap, int)));
-	if (format == 'X')
-		return (ft_handleHexBig(va_arg(ap, int)));
+	// if (format == 'u')
+	// 	return (ft_handleUnsigned(va_arg(ap, unsigned int)));
+	if (format == 'x' || format == 'X')
+		return (ft_handleHex(va_arg(ap, int)));
 	if (format == '%')
-		return (ft_handlePercent(va_arg(ap, int)));
+		return (ft_handlePercent());
 	return (-1);
 }

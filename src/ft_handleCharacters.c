@@ -13,6 +13,11 @@ int	ft_handleString(char *s)
 
 int	ft_handleCharacter(int c)
 {
-	write(1, c, 1);
+	write(1, &c, 1);
 	return (1);
+}
+
+int	ft_handlePointer(void *p)
+{
+	return (ft_handleString((char *)(&p)));
 }

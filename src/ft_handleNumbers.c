@@ -2,14 +2,36 @@
 
 int	ft_handleInt(int d)
 {
-	char	*itoa;
-
+	printf(" ****im here %d**** ", d);
 	return (ft_handleString(ft_itoa(d)));
 }
 
-int	ft_handleInteger(int i)
+int	ft_handleHex(int n)
 {
-	char	*itoa;
+	char	hexaDeciNum[100];
+	int		i;
+	int		temp;
+	int		charCount;
 
-	return (ft_handleString(ft_itoa(i)));
+	i = 0;
+	charCount = 0;
+	while (n != 0)
+	{
+		temp = 0;
+		temp = n % 16;
+		if (temp < 10)
+		{
+			hexaDeciNum[i] = temp + 48;
+			i++;
+		}
+		else
+		{
+			hexaDeciNum[i] = temp + 55;
+			i++;
+		}
+		n = n / 16;
+	}
+	for (int j = i - 1; j >= 0; j--)
+		charCount += ft_handleCharacter(hexaDeciNum[j]);
+	return (charCount);
 }
