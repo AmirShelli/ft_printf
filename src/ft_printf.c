@@ -58,15 +58,13 @@ int	ft_displayFormat(char format, va_list ap)
 	if (format == 'c')
 		return (ft_handleCharacter(va_arg(ap, int)));
 	if (format == 's')
-		return (ft_handleString(va_arg(ap, void *)));
+		return (ft_handleString(va_arg(ap, char *)));
 	if (format == 'p')
 		return (ft_handlePointer(va_arg(ap, void *)));
 	if (format == 'i' || format == 'd' || format == 'u')
 		return (ft_handleInt(va_arg(ap, int)));
-	// if (format == 'u') what is this?
-	// 	return (ft_handleUnsigned(va_arg(ap, unsigned int)));
 	if (format == 'x' || format == 'X')
-		return (ft_handleHex(va_arg(ap, int)));
+		return (ft_handleHex(va_arg(ap, int), format));
 	if (format == '%')
 		return (ft_handlePercent());
 	return (-1);

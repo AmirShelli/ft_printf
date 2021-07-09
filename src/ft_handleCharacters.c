@@ -17,7 +17,38 @@ int	ft_handleCharacter(int c)
 	return (1);
 }
 
-int	ft_handlePointer(void *p)
+char	hex_digit(int v)
 {
-	return (ft_handleString((char *)(&p)));
+	if (v >= 0 && v < 10)
+		return ('0' + v);
+	else
+		return ('a' + v - 10);
+}
+
+int	ft_handlePointer(void *p0)
+{
+	int			i;
+	uintptr_t	p;
+	int			check;
+	int			charCount;
+
+	p = (uintptr_t)p0;
+	ft_putchar('0');
+	ft_putchar('x');
+	check = 0;
+	charCount = 0;
+	i = (sizeof(p) << 3) - 4;
+	while (i >= 0)
+	{
+
+		if ((int)((p >> i) & 0xf) != 0)
+			check = 1;
+		if (check)
+		{	
+			ft_putchar(hex_digit((p >> i) & 0xf));
+			charCount++;
+		}
+		i -= 4;
+	}
+	return (charCount);
 }

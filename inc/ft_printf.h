@@ -11,6 +11,6 @@ int		ft_handlePointer(void *p);
 
 // int		ft_handleUnsigned(int u);
 int		ft_handleInt(int d);
-int		ft_handleHex(int h);
+int		ft_handleHex(int h, char x);
 
 int		ft_handlePercent(void);
