@@ -15,7 +15,7 @@ int	ft_printf(const char *stringFormat, ...)
 			charCount++;
 		}
 		else
-			charCount += ft_displayFormat(*(++stringFormat), ap);
+			charCount += ft_handleFormat(*(++stringFormat), ap);
 		stringFormat++;
 	}
 	va_end(ap);
@@ -51,7 +51,7 @@ int	ft_printf(const char *stringFormat, ...)
  * to apply what's needed.
  */
 
-int	ft_displayFormat(char format, va_list ap)
+int	ft_handleFormat(char format, va_list ap)
 {
 	if (format == 'c')
 		return (ft_handleCharacter(va_arg(ap, int)));

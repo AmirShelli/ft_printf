@@ -1,6 +1,5 @@
 #include "../inc/ft_printf.h"
-
-int	ft_handleString(char *s)
+static int	ft_displayString(char *s)
 {
 	int	i;
 
@@ -13,32 +12,25 @@ int	ft_handleString(char *s)
 		ft_putstr("(null)");
 		return (6);
 	}
+	free(s);
 	return (i);
 }
 
-int	ft_handleCharacter(int c)
+int	ft_handleString(char *s)
 {
-	write(1, &c, 1);
-	return (1);
+	char	*string;
+
+	string = ft_strdup(s);
+	return (ft_displayString(string));
 }
 
 int	ft_handleInt(int d)
 {
-	return (ft_handleString(ft_itoa(d)));
+	return (ft_displayString(ft_itoa(d)));
 }
 
 int	ft_handleUnsInt(unsigned int d)
 {
 	d = (unsigned int)(4294967295 + 1 + d);
-	return (ft_handleString(ft_utoa(d)));
+	return (ft_displayString(ft_utoa(d)));
 }
-
-char	hex_digit(int v)
-{
-	if (v >= 0 && v < 10)
-		return ('0' + v);
-	else
-		return ('a' + v - 10);
-}
-
-
