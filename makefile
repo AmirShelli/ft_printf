@@ -1,6 +1,6 @@
 LIBFT = ./libft/libft.a
 
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 SRCS =  $(wildcard ./src/*.c)
 
@@ -15,7 +15,6 @@ all : $(NAME)
 $(NAME): $(OBJS)
 	$(MAKE) all -C ./libft
 	cp $(LIBFT) $(NAME)
-	$(CC) $(FLAGS) $(INCLUDES) $(SRCS)
 	ar -rcs $(NAME) $(OBJS)
 
 clean :

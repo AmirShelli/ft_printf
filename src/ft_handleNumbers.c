@@ -1,40 +1,51 @@
 #include "../inc/ft_printf.h"
+#include "../inc/libft.h"
 
-int	ft_handleInt(int d)
+static void	ft_puthex(unsigned long int n, char x)
 {
-	return (ft_handleString(ft_itoa(d)));
+	if (n >= 16)
+	{
+		ft_puthex(n / 16, x);
+		ft_puthex(n % 16, x);
+	}
+	else
+	{
+		if (n < 10)
+			ft_putchar(n + '0');
+		else
+		{	
+			if (x == 'x')
+				ft_putchar(n - 10 + 'a');
+			else
+				ft_putchar(n - 10 + 'A');
+		}
+	}
 }
 
-int	ft_handleHex(int n, char x)
+static int	ft_xlen(unsigned long int n)
 {
-	char	hexaDeciNum[100];
-	int		i;
-	int		j;
-	int		temp;
-	int		charCount;
+	int	len;
 
-	i = 0;
-	charCount = 0;
+	len = 0;
+	if (n == 0)
+		return (1);
 	while (n != 0)
 	{
-		temp = n % 16;
-		if (temp < 10)
-			hexaDeciNum[i++] = temp + 48;
-		else
-		{
-			if (x == 'x')
-				hexaDeciNum[i] = temp + 87;
-			else
-				hexaDeciNum[i] = temp + 55;
-			i++;
-		}
-		n = n / 16;
+		n /= 16;
+		len++;
 	}
-	j = i - 1;
-	while (j >= 0)
-	{	
-		charCount += ft_handleCharacter(hexaDeciNum[j]);
-		j--;
-	}
-	return (charCount);
+	return (len);
+}
+
+int	ft_handleHex(unsigned long int n, char x)
+{
+	ft_puthex(n, x);
+	return (ft_xlen(n));
+}
+
+int	ft_handlePointer(void *p)
+{
+	ft_putstr("0x");
+	ft_puthex((unsigned long) p, 'x');
+	return (ft_xlen((unsigned long)p) + 2);
 }

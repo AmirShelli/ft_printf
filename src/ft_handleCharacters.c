@@ -8,6 +8,11 @@ int	ft_handleString(char *s)
 	if (s)
 		while (s[i] != '\0')
 			write(1, &s[i++], 1);
+	else
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
 	return (i);
 }
 
@@ -15,6 +20,17 @@ int	ft_handleCharacter(int c)
 {
 	write(1, &c, 1);
 	return (1);
+}
+
+int	ft_handleInt(int d)
+{
+	return (ft_handleString(ft_itoa(d)));
+}
+
+int	ft_handleUnsInt(unsigned int d)
+{
+	d = (unsigned int)(4294967295 + 1 + d);
+	return (ft_handleString(ft_utoa(d)));
 }
 
 char	hex_digit(int v)
@@ -25,30 +41,4 @@ char	hex_digit(int v)
 		return ('a' + v - 10);
 }
 
-int	ft_handlePointer(void *p0)
-{
-	int			i;
-	uintptr_t	p;
-	int			check;
-	int			charCount;
 
-	p = (uintptr_t)p0;
-	ft_putchar('0');
-	ft_putchar('x');
-	check = 0;
-	charCount = 0;
-	i = (sizeof(p) << 3) - 4;
-	while (i >= 0)
-	{
-
-		if ((int)((p >> i) & 0xf) != 0)
-			check = 1;
-		if (check)
-		{	
-			ft_putchar(hex_digit((p >> i) & 0xf));
-			charCount++;
-		}
-		i -= 4;
-	}
-	return (charCount);
-}

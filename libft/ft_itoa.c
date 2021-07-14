@@ -44,3 +44,38 @@ char	*ft_itoa(int n)
 	}
 	return (str);
 }
+
+static size_t	ft_unslen(unsigned int n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n <= 0)
+		i++;
+	while (n)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+char	*ft_utoa(unsigned int n)
+{
+	char	*str;
+	size_t	size;
+
+	size = ft_unslen(n);
+	str = (char *)malloc(size + 1);
+	if (!str)
+		return (NULL);
+	str[size] = '\0';
+	if (!n)
+		str[0] = '0';
+	while (n)
+	{
+		str[--size] = '0' + (n % 10);
+		n /= 10;
+	}
+	return (str);
+}

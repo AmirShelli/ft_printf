@@ -41,8 +41,7 @@
 *.su
 *.idb
 *.pdb
-testing/
-tripouille/
+T_*/
 
 # Kernel Module Compile Results
 *.mod*
