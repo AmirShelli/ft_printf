@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include "libft.h"
 
+int		ft_printf(const char *stringFormat, ...);
 char	*ft_getFormat(const char **string);
 int		ft_handleFormat(char format, va_list ap);
 
@@ -13,7 +14,7 @@ int		ft_handlePointer(void *p);
 
 int		ft_handleInt(int d);
 int		ft_handleUnsInt(unsigned int d);
-int		ft_handleHex(unsigned long int h, char x);
+int		ft_handleHex(unsigned int h, char x);
 int		ft_handlePercent(void);
 
 #endif

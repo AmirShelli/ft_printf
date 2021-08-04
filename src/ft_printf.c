@@ -64,8 +64,8 @@ int	ft_handleFormat(char format, va_list ap)
 	if (format == 'u')
 		return (ft_handleUnsInt(va_arg(ap, unsigned int)));
 	if (format == 'x' || format == 'X')
-		return (ft_handleHex(va_arg(ap, unsigned long int), format));
+		return (ft_handleHex(va_arg(ap, unsigned int), format));
 	if (format == '%')
 		return (ft_handlePercent());
-	return (-1);
+	return (0);
 }

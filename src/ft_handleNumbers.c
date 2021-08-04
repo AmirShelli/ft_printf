@@ -1,7 +1,7 @@
 #include "../inc/ft_printf.h"
 #include "../inc/libft.h"
 
-static void	ft_puthex(unsigned long int n, char x)
+static void	ft_puthex(unsigned long long n, char x)
 {
 	if (n >= 16)
 	{
@@ -22,7 +22,7 @@ static void	ft_puthex(unsigned long int n, char x)
 	}
 }
 
-static int	ft_xlen(unsigned long int n)
+static int	ft_xlen(unsigned long long n)
 {
 	int	len;
 
@@ -37,7 +37,7 @@ static int	ft_xlen(unsigned long int n)
 	return (len);
 }
 
-int	ft_handleHex(unsigned long int n, char x)
+int	ft_handleHex(unsigned int n, char x)
 {
 	ft_puthex(n, x);
 	return (ft_xlen(n));
@@ -46,6 +46,6 @@ int	ft_handleHex(unsigned long int n, char x)
 int	ft_handlePointer(void *p)
 {
 	ft_putstr("0x");
-	ft_puthex((unsigned long) p, 'x');
-	return (ft_xlen((unsigned long)p) + 2);
+	ft_puthex((unsigned long long)p, 'x');
+	return (ft_xlen((unsigned long long)p) + 2);
 }
